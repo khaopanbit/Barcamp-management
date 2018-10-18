@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['barcamp-management.herokuapp.com', '127.0.0.1:3000']
 
 INSTALLED_APPS = [
     'barcampapp',
-    'barcampapp.apps.BarcampappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
