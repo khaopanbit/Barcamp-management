@@ -25,7 +25,7 @@ SECRET_KEY = 's2i3k2mh56np4w**y-+om(1_)^5zn-8v6gq(h2%ds0=b&k6xqy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['barcamp-management.herokuapp.com', '127.0.0.1:3000']
+ALLOWED_HOSTS = ['barcamp-management.herokuapp.com', '127.0.0.1:8000']
 
 
 # Application definition
