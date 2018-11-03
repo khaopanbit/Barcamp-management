@@ -1,7 +1,11 @@
 from rest_framework import generics
-from .serializers import SpeakerSerializer
-from .models import Speaker
+from .serializers import UserSerializer, TopicSerializer
+from .models import User, Topics
 
-class SpeakerListCreate(generics.ListCreateAPIView):
-    queryset = Speaker.objects.all()
-    serializer_class = SpeakerSerializer
+class TopicListCreate(generics.ListCreateAPIView):
+    queryset = Topics.objects.all()
+    serializer_class = TopicSerializer
+
+class UserListCreate(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
