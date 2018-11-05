@@ -1,9 +1,21 @@
 import React ,{ Component } from 'react';
 import firebase from 'firebase'
 import TimeKeeper from 'react-timekeeper';
-import {Modal,ModalHeader, ModalBody, ModalFooter, ButtonGroup, Button,Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown,
+import {Container, Modal,ModalHeader, ModalBody, ModalFooter, ButtonGroup, Button,Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown,
         DropdownToggle, DropdownMenu, DropdownItem,Popover, PopoverBody, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { Timepicker } from 'react-timekeeper/lib/components/Timepicker';
+
+const mid = {
+  textAlign : 'center'
+}
+
+const topicButton = {
+  width : '750px',
+  height : '50px',
+  marginTop : '25px',
+  marginRight : '40px',
+  marginLeft : '40px'
+}
 
 const Logo = {
     fontFamily: 'cursive',
@@ -247,10 +259,10 @@ class Speaker extends Component {
           </PopoverBody>
         </Popover>
         </div>
-        <div>
+        <Container style = {mid}>
             {this.state.allTopic.map((topic, index) => (
               <div>
-                <Button color="danger" onClick={() =>this.modalToggle(index+1)}>{topic.topic_name}</Button>
+                <Button style = {topicButton} outline color="danger" onClick={() =>this.modalToggle(index+1)}>{topic.topic_name}</Button>
                 <Modal isOpen={this.state.modal[index+1]} toggle={() =>this.modalToggle(index+1)} >
                   <ModalHeader toggle={() =>this.modalToggle(index+1)} charCode= "x">{topic.topic_name}</ModalHeader>
                   <ModalBody>
@@ -263,7 +275,7 @@ class Speaker extends Component {
               </div>
             ))}
             {this.change()}
-          </div>
+          </Container>
       </div>
     );
   }
