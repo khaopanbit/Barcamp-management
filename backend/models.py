@@ -3,8 +3,8 @@ from django.db import models
 class Topics(models.Model):
     topic_name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
-    start_time = models.TimeField('start time')
-    end_time = models.TimeField('end time')
+    start_time = models.CharField(max_length=40)
+    end_time = models.CharField(max_length=40)
     speaker = models.CharField(max_length=100)
     vote = models.IntegerField(default=0)
     room = models.IntegerField(default=0)

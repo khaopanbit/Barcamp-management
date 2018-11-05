@@ -50,6 +50,7 @@ class Speaker extends Component {
     this.toggleStopTimekeeper = this.toggleStopTimekeeper.bind(this);
     this.handleTopicChange = this.handleTopicChange.bind(this);
     this.handleDesChange = this.handleDesChange.bind(this);
+    this.handleSpeakerChange = this.handleSpeakerChange.bind(this)
     this.change = this.change.bind(this);
     this.getData = this.getData.bind(this);
     this.modalToggle = this.modalToggle.bind(this);
@@ -100,13 +101,15 @@ class Speaker extends Component {
   handleTopicChange(e) {
     this.setState({ topic: e.target.value });
   }
+  handleSpeakerChange(e) {
+    this.setState({ name: e.target.value });
+  }
   handleDesChange(e) {
     this.setState({ description: e.target.value });
   }
   modalToggle(id) {
     this.state.modal[id] = !this.state.modal[id]
     this.forceUpdate()
-    console.log('modal')
   }
   addNewTopic(){
     var to = this.state.topic
@@ -144,7 +147,6 @@ class Speaker extends Component {
   change(){
     if(this.state.start == true){
     for(var i = this.state.start ; i <= this.state.allTopic.length;i++){
-      console.log('lol')
       var newArray = this.state.modal.slice();    
       newArray.push({id: false});   
       this.setState({modal:newArray})
@@ -200,6 +202,11 @@ class Speaker extends Component {
                 <Input placeholder="topic" onChange = {this.handleTopicChange} />
             </InputGroup>
             <br/>
+            <InputGroup >
+                <InputGroupAddon addonType="prepend">Speaker</InputGroupAddon>
+                <Input placeholder="name" onChange = {this.handleSpeakerChange} />
+            </InputGroup>
+            <br/>
             <Input type="textarea" name="text" id="exampleText" placeholder="Description..." onChange = {this.handleDesChange}/>
             <br/>
             <ButtonGroup>
@@ -246,7 +253,11 @@ class Speaker extends Component {
                 <Button color="danger" onClick={() =>this.modalToggle(index+1)}>{topic.topic_name}</Button>
                 <Modal isOpen={this.state.modal[index+1]} toggle={() =>this.modalToggle(index+1)} >
                   <ModalHeader toggle={() =>this.modalToggle(index+1)} charCode= "x">{topic.topic_name}</ModalHeader>
-                  <ModalBody>{topic.description}</ModalBody>
+                  <ModalBody>
+                      {topic.description}
+                      <br/>
+                      {topic.start_time} - {topic.end_time}
+                  </ModalBody>
                   <ModalFooter>by {topic.speaker}</ModalFooter>
                 </Modal>
               </div>
