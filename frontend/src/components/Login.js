@@ -12,10 +12,18 @@ const Lstyles = {
   textAlign: 'center'
 };
 
+const load = {
+  textAlign : 'right'
+}
+const welcome = {
+  fontSize : '70px'
+}
+
 class Login extends Component{
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.changePage =this.changePage.bind(this);
       }
     
       toggle() {
@@ -40,6 +48,11 @@ class Login extends Component{
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+  changePage(){
+    setTimeout(() => {
+      this.props.history.push('/attendee');
+    }, 2000);
+  }
     componentDidMount = () => {
         firebase.auth().onAuthStateChanged(user => {
           this.setState({ isSignedIn: !!user })
@@ -53,19 +66,11 @@ class Login extends Component{
           <font size="90">Barcamp Login</font>
             {this.state.isSignedIn ? (
               <span>
-                <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                  <DropdownToggle caret color = "primary">
-                    Button Dropdown
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem onClick={() => this.props.history.push('/speaker')}>Speaker</DropdownItem>
-                    <DropdownItem>Audience</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem style={{color: 'red'}} onClick={() => firebase.auth().signOut()}>Sign out</DropdownItem>
-                  </DropdownMenu>
-                </ButtonDropdown>
-              </span>
+                <h1 style={welcome}>Welcome</h1>
+                <h4 style={load}>loading</h4>
+                {this.changePage()}
+               </span>
+              
             ) : (
               <StyledFirebaseAuth
                 uiConfig={this.uiConfig}

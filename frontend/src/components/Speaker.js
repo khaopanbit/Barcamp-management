@@ -1,9 +1,9 @@
 import React ,{ Component } from 'react';
 import firebase from 'firebase'
 import TimeKeeper from 'react-timekeeper';
+import Room from './Room';
 import {Container, Modal,ModalHeader, ModalBody, ModalFooter, ButtonGroup, Button,Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown,
         DropdownToggle, DropdownMenu, DropdownItem,Popover, PopoverBody, InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { Timepicker } from 'react-timekeeper/lib/components/Timepicker';
 
 const mid = {
   textAlign : 'center'
@@ -64,9 +64,9 @@ class Speaker extends Component {
     this.handleDesChange = this.handleDesChange.bind(this);
     this.handleSpeakerChange = this.handleSpeakerChange.bind(this)
     this.change = this.change.bind(this);
-    this.getData = this.getData.bind(this);
     this.modalToggle = this.modalToggle.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.modalRoomToggle = this.modalRoomToggle.bind(this)
     this.state = {
       isOpen: false,
       modal: [] ,
@@ -81,7 +81,8 @@ class Speaker extends Component {
       name : "Speaker",
       room : 0 ,
       vote : 0 ,
-      start: true
+      start: true,
+      modalRoom : false,
     };
   }
   toggle() {
@@ -123,6 +124,11 @@ class Speaker extends Component {
     this.state.modal[id] = !this.state.modal[id]
     this.forceUpdate()
   }
+  modalRoomToggle() {
+    this.setState({
+        modalRoom: !this.state.modalRoom
+      });
+  }
   addNewTopic(){
     var to = this.state.topic
     var des = this.state.description
@@ -142,23 +148,11 @@ class Speaker extends Component {
     this.setState({
         popoverOpen: !this.state.popoverOpen,
       });
-    console.log(this.state.topic)
-    console.log(this.state.description)
     window.location.reload();
-  }
-  getData(){
-    $.ajax({
-      type: "GET",
-      url: "http://localhost:3000/api/topic/",
-      dataType: "json",
-      success: function () {
-        console.log('success')
-      }
-    });
   }
   change(){
     if(this.state.start == true){
-    for(var i = this.state.start ; i <= this.state.allTopic.length;i++){
+    for(var i = 0 ; i <= this.state.allTopic.length;i++){
       var newArray = this.state.modal.slice();    
       newArray.push({id: false});   
       this.setState({modal:newArray})
@@ -191,9 +185,17 @@ class Speaker extends Component {
                 {/* {firebase.auth().currentUser.displayName} */}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem style={{color: 'red'}} onClick={this.logout}>
-                    Logout
-                  </DropdownItem>
+                <DropdownItem onClick={() => this.props.history.push('/attendee')}>Attendee</DropdownItem>
+                    <DropdownItem onClick={this.modalRoomToggle}>Room</DropdownItem>
+                    <Modal isOpen={this.state.modalRoom} toggle={this.modalRoomToggle} >
+                        <ModalHeader toggle={this.modalRoomToggle} charCode= "x">Room</ModalHeader>
+                        <ModalBody style={mid}>
+                            <Room/>
+                        </ModalBody>
+                  
+                        </Modal>
+                    <DropdownItem divider />
+                    <DropdownItem style={{color: 'red'}} onClick={this.logout}>Sign out</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
