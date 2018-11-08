@@ -1,12 +1,35 @@
 import React, {Component} from 'react'
-import {Button} from 'reactstrap'
+import {Button,Col,Row,Container} from 'reactstrap'
+import Room from './Room'
+// import {Col,Row,Container,Bu}
 
+const block = {
+   textAlign: 'center',
+   fontFamily: 'Permanent Marker', 
+   fontFamily: 'cursive',
+     fontSize: '100px',
+ }
+ const room ={
+   textAlign: 'center',
+   margin: '10px' ,
+   height : '100px' ,
+   width : '200px' ,
+ }
 class Home extends Component {
     render(){
         return (
-            <div className="container">
-                <Button outline color="primary" onClick={() => this.props.history.push('/login')}>Sign in</Button>
-            </div>
+            <Container>
+                <Row>
+                    <Col style = {block}>
+                    BARCAMP
+                    </Col>
+                </Row>    
+                <Room/>
+                <br></br>
+                <Row>
+                    <Button outline color="primary" onClick={() => this.props.history.push('/login')} block>Sign in</Button>
+                </Row>
+            </Container>
         );
     }
 }
