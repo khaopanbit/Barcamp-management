@@ -1,0 +1,13 @@
+[
+    {
+        "model": "backend.topics",
+        "pk": 1,
+        "fields": {
+            "topic_name": "BNK",
+            "description": "bra bra bra",
+            "start_time": "10:00:AM",
+            "end_time": "11:30:AM",
+            "speaker":  "Jobsan" 
+        }
+    }
+]
