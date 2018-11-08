@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
@@ -13,7 +12,9 @@ const Lstyles = {
 };
 
 const load = {
-  textAlign : 'right'
+  textAlign : 'right',
+  padding : '50px',
+  fontSize : "20px"
 }
 const welcome = {
   fontSize : '70px'
@@ -50,7 +51,7 @@ class Login extends Component{
   }
   changePage(){
     setTimeout(() => {
-      this.props.history.push('/attendee');
+      this.props.history.push('/speaker');
     }, 2000);
   }
     componentDidMount = () => {
@@ -67,7 +68,7 @@ class Login extends Component{
             {this.state.isSignedIn ? (
               <span>
                 <h1 style={welcome}>Welcome</h1>
-                <h4 style={load}>loading</h4>
+                <h4 style={load}>loading...</h4>
                 {this.changePage()}
                </span>
               
