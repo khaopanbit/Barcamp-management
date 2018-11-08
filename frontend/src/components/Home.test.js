@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom'
+import React ,{Component}from 'react';
+import Enzyme, {shallow} from 'enzyme'
+import EnzymeAdapter from 'enzyme-adapter-react-16'
 import Home from './Home.js'
+import Login from './Login.js'
 
-test('renders wihout error', () => {
-const div = document.createElement('div');
-ReactDOM.render(<Home/>, div);
-ReactDOM.unmountComponentAtNode(div); 
+Enzyme.configure({ adapter: new EnzymeAdapter() });
+
+test('Home renders wihout error', () => {
+shallow(<Home />) 
 }); 
+
+test('Login renders wihout error', () => {
+    shallow(<Login />) 
+    }); 

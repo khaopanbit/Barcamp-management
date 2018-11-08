@@ -211,7 +211,7 @@ class Speaker extends Component {
             
             <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
           <PopoverBody style={popoverBody}>
-            <InputGroup >
+            <InputGroup >q
                 <InputGroupAddon addonType="prepend">Topic</InputGroupAddon>
                 <Input placeholder="topic" onChange = {this.handleTopicChange} />
             </InputGroup>
