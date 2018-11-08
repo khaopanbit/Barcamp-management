@@ -15,6 +15,7 @@ This software is developed as a part of 01219245	Individual Software Development
 
 * Clone this github repo
 * Go to the repo and install node_modules `npm install`
+* Load initialize database `python manage.py loaddata backend`
 * Create any necessary database tables according to the database settings `python manage.py migrate`
 * Run locally `python manage.py runserver 3000`
 * Head over http://localhost:3000/
