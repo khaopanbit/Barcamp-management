@@ -83,6 +83,7 @@ class Speaker extends Component {
       vote : 0 ,
       start: true,
       modalRoom : false,
+      username : "user"
     };
   }
   toggle() {
@@ -160,16 +161,28 @@ class Speaker extends Component {
     this.setState({start:false})
   }
 }
-  componentDidMount() {
-    fetch("http://localhost:3000/api/topic/")
-      .then(response => {
-        if (response.status !== 200) {
-          return console.log('error')
-        }
-        return response.json();
-      })
-      .then(data => this.setState({ allTopic: data }));
-    console.log('initialize')
+componentDidMount() {
+  fetch("http://localhost:3000/api/topic/")
+    .then(response => {
+      if (response.status !== 200) {
+        return console.log('error')
+      }
+      return response.json();
+    })
+    .then(data => this.setState({ allTopic: data }));
+  console.log('initialize')
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+// Signed in
+      const name = JSON.stringify(user, null, 2);
+      const nameE =  JSON.parse(name);
+    this.setState({username:nameE.displayName})
+   } else {
+// Signed out
+      this.setState({username:"no user"})
+    }
+  }.bind(this))
+  console.log('initialize2')
 }
   render() {
     return (
@@ -182,7 +195,7 @@ class Speaker extends Component {
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                {/* {firebase.auth().currentUser.displayName} */}
+                {this.state.username}
                 </DropdownToggle>
                 <DropdownMenu right>
                 <DropdownItem onClick={() => this.props.history.push('/attendee')}>Attendee</DropdownItem>
