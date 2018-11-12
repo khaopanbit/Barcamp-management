@@ -4,6 +4,23 @@ Barcamp management is a web application for manage Barcamp event. Make managing 
 
 This software is developed as a part of 01219245	Individual Software Development Process at Kasetsart University
 
+# Requirements
+
+* Python: [download](https://www.python.org/downloads/)
+* NodeJS: [dowload](https://nodejs.org/en/)
+* Django: `pip install django` or [click](https://www.djangoproject.com/download/)
+* Rest Framework: `pip install djangorestframework` or [click](https://www.django-rest-framework.org/)
+
+# Installation
+
+* Clone this github repo
+* Go to the repo and `git checkout dev` then install node_modules `npm install`
+* Load initialize database `python manage.py loaddata backend`
+* Create any necessary database tables according to the database settings `python manage.py migrate`
+* Run locally `python manage.py runserver 3000`
+* Head over http://localhost:3000/
+
+
 # Member
 
 | Name        | ID           | Github  | Role |
