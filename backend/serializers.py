@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from .models import Speaker
+from .models import Topics, User
 
-class SpeakerSerializer(serializers.ModelSerializer):
+class TopicSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Speaker
+        model = Topics
+        fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
         fields = '__all__'
