@@ -224,7 +224,7 @@ componentDidMount() {
             
             <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
           <PopoverBody style={popoverBody}>
-            <InputGroup >q
+            <InputGroup >
                 <InputGroupAddon addonType="prepend">Topic</InputGroupAddon>
                 <Input placeholder="topic" onChange = {this.handleTopicChange} />
             </InputGroup>

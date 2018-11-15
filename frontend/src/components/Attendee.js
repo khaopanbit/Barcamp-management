@@ -126,27 +126,30 @@ class Attendee extends Component {
         this.props.history.push('/');
   }
   update(topic,index){
-    // var to = topic.topic_name
-    // var des = topic.description
-    // var stime = topic.start_time
-    // var etime = topic.end_time
-    // var speak = topic.speaker
-    // var r = topic.room
-    // var v = topic.vote
-    // const sendData = { 'topic_name' : to, 'description':des, 'start_time':stime, 'end_time':etime, 'speaker':speak, 'room':r, 'vote':v}
-    // $.ajax({
-    //   dataType: 'json',
-    //   url: 'http://localhost:3000/api/topic/vote',
-    //   type: 'PUT',
-    //   data: JSON.stringify(sendData),
-    //   contentType:'application/json',
-    // })
+    var to = topic.topic_name
+    var de = topic.description
+    var st = topic.start_time
+    var et = topic.end_time
+    var sp = topic.speaker
+    var r = topic.room
+    var v = topic.vote+1
+
+    const sendData = { 'topic_name':to, 'description': de, 'start_time': st, 'end_time': et,
+                      'speaker': sp, 'room': r, 'vote': v }
+    $.ajax({
+      dataType: 'json',
+      url: `http://localhost:3000/api/topic/${index+1}/`,
+      type: 'PUT',
+      data: JSON.stringify(sendData),
+      contentType:'application/json',
+    })
     // this.state.modal[index+1] = !this.state.modal[index+1]
     // this.forceUpdate()
     // console.log(to)
     // console.log(v)
     // window.location.reload();
     console.log(index+1)
+    console.log(v)
   }
   render() {
     return (
@@ -198,7 +201,7 @@ class Attendee extends Component {
                   <ModalFooter>
                       by {topic.speaker}
                       <br/>
-                      <Button onClick={()=>this.update(topic,index)}></Button>
+                      <Button onClick={()=>this.update(topic,index)}>+</Button>
                       </ModalFooter>
                 </Modal>
               </div>
