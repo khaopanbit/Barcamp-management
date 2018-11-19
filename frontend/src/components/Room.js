@@ -31,7 +31,7 @@ class Room extends Component {
                         <Button outline color="warning" size = "lg" style={room}>ROOM 4</Button>
                     </Col>
                 </Row>
-                <br></br>
+                <br/>
             </Container>
         );
     }

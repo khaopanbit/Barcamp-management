@@ -25,7 +25,7 @@ class Home extends Component {
                     </Col>
                 </Row>    
                 <Room/>
-                <br></br>
+                <br/>
                 <Row>
                     <Button outline color="primary" onClick={() => this.props.history.push('/login')} block>Sign in</Button>
                 </Row>
