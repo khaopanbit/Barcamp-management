@@ -101,12 +101,13 @@ class Attendee extends Component {
   }
 
   checked(){
-    this.state.allUser.map((user,index)=>{
+    this.state.allUser.some((user,index)=>{
       if(user.name==this.state.username){
         this.setState({
           userID: user.id,
           find : index
         });
+        return true
       }
     })
   }
@@ -146,6 +147,7 @@ class Attendee extends Component {
           data: JSON.stringify(sendDataU),
           contentType:'application/json',
           })
+          window.location.reload()
         }else {
           var cur_user = this.state.allUser[this.state.find];
           this.setState({
@@ -175,28 +177,37 @@ class Attendee extends Component {
     var v = topic.vote+1
     var user = this.state.username
     var tvote = this.state.allVote +"'" + index.toString()
+    var idtop = index+1
 
+    if(!this.state.allVote.includes(idtop)){
+    
     const sendData = { 'topic_name':to, 'description': de, 'start_time': st, 'end_time': et,
                       'speaker': sp, 'room': r, 'vote': v }
-    $.ajax({
-      dataType: 'json',
-      url: `http://localhost:3000/api/topic/${index+1}/`,
-      type: 'PUT',
-      data: JSON.stringify(sendData),
-      contentType:'application/json',
-    })
+      $.ajax({
+        dataType: 'json',
+        url: `http://localhost:3000/api/topic/${idtop}/`,
+        type: 'PUT',
+        data: JSON.stringify(sendData),
+        contentType:'application/json',
+      })
+  
+      var user = this.state.username
+      var tvote = this.state.allVote+ ',' +(index+1).toString()
+      this.setState({allVote:tvote})
+      const sendData2 = { 'name':user, 'topic_voted':tvote}
+      $.ajax({
+        dataType: 'json',
+        url: `http://localhost:3000/api/user/${this.state.userID}/`,
+        type: 'PUT',
+        data: JSON.stringify(sendData2),
+        contentType:'application/json',
+      })
 
-    var user = this.state.username
-    var tvote = this.state.allVote+ ',' +(index+1).toString()
-    this.setState({allVote:tvote})
-    const sendData2 = { 'name':user, 'topic_voted':tvote}
-    $.ajax({
-      dataType: 'json',
-      url: `http://localhost:3000/api/user/${this.state.userID}/`,
-      type: 'PUT',
-      data: JSON.stringify(sendData2),
-      contentType:'application/json',
-    })
+      alert("You are vote success.")
+    }else{
+      alert("You voted this topic.")
+    }
+
   }
 
   render() {
